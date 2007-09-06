@@ -1,0 +1,29 @@
+CleVR Actionscript 3 Library
+
+2007-09-26
+
+***Matrix Algebra***
+This library provides some classes for linear algebra. It's ported from the NIST's JAMA Java Matrix 
+library.
+
+It's not a full port - only the classes that we needed for CleVR have been ported, 
+so there are not all the decomposition classes in JAMA. There are also a few methods missing from the
+RealMatrix class.
+
+The main class is called RealMatrix, so as to not conflict with the Matrix class in AS3.
+
+***Bitmap interpolation***
+InterpolatedBitmapData adds support for bicubic and bilinear interpolation to
+the Actionscript BitmapData class.
+
+It adds two public methods - getPixelBilinear and getPixelBicubic. You can call these with 
+sub-pixel coordinates and it will interpolate the RGB value for that point.
+
+***Histogram stretching***
+This class provides simple methods for generating a histogram from an image, and from that creating ColorTransforms 
+and ColorMatrixFilters for doing histogram stretching. 
+
+The comments in class should be self-explanatory.
+
+See http://www.clevr.com/ for any updates. You'll also find CleVR to be the best way to create and share 
+panoramic photos. This library was created for the CleVR Stitcher, and Adobe AIR panoramic photo stitcher.

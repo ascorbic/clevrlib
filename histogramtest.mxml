@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="onCreationComplete(event);">
+	
+	
+	<!-- Copyright 2007 Sphex LLP. 
+
+		This work is licensed under the Creative Commons Attribution 2.0 UK: England & Wales License. 
+		To view a copy of this license, visit http://creativecommons.org/licenses/by/2.0/uk/ or send a 
+		letter to Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+	
+	-->
+	
+	<mx:Script><![CDATA[
+		
+		import mx.events.FlexEvent;
+		import com.clevr.graphics.*;
+		import com.clevr.test.TestImage;
+
+		/*
+		*	Demo of histogram stretching.
+		*
+		*	@langversion ActionScript 3.0
+		*	@playerversion Flash 9.0
+		*
+		*	@author 
+		*	@since  24.07.2007
+		*/
+
+		private var testImage:TestImage;
+		
+		private function onCreationComplete(event:FlexEvent) : void {
+			testImage = new TestImage('test.jpg');
+			testImage.addEventListener(Event.COMPLETE, function (e:Event):void {
+				mainBox.addChild(e.target.originalImage);
+			});
+			
+		}
+				
+		private function updateThreshold():void {
+			var val:int = thresholdSlider.value * 2 - 100;
+			trace(val);
+			if (val == -100) {
+				mainBox.transform.colorTransform = new ColorTransform();
+			} else if (val < 0) {
+				mainBox.transform.colorTransform = testImage.colorTransform((Math.pow(10, (100 + val) / 100) / 10) - 1);
+			} else {
+				mainBox.transform.colorTransform = testImage.colorTransform(Math.pow(10, val  / 50));
+			}
+			
+		}
+		
+		
+	]]></mx:Script>
+
+<mx:HSlider id='thresholdSlider' liveDragging="true" minimum="0" maximum="100" snapInterval='10' tickInterval='10' showDataTip='true' value="0" change="updateThreshold()" dataTipPrecision='0' />
+
+<mx:Box id="mainBox" direction="vertical">
+	
+</mx:Box>	
+	
+</mx:Application>
+
